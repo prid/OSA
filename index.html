@@ -1,0 +1,136 @@
+<html ng-app="app">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/cards.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="js/scripts.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <h1>Outside Events & Promotions</h1>
+            <small>This demo is made for the OSA project</small>
+        </header>
+        <div class="container" ng-controller="switchController">
+            <div class="switchContainer row">
+                <div class="col-xs-6 switch">
+                    <button type="button" ng-click="activeClass='events'" ng-class="getActiveClass('events')" class="btn btn-primary btn-lg btn-block" >Events</button>
+                </div>
+                <div class="col-xs-6 switch">
+                    <button ng-click="activeClass='promotions'" ng-class="getActiveClass('promotions')" type="button" class="btn btn-primary btn-lg btn-block" >Promotions</button>
+                </div>
+            </div>
+            <!--ng-if inits controller each time (by inspecting network)-->
+            <div class="events" ng-show="activeClass=='events'" ng-controller="eventController">
+                <div class="checkboxList row">
+                    <div class="col-md-8">
+                        <div ng-repeat="category in categories" class="col-md-4">
+                            <label>
+                            <input type="checkbox" ng-model="filter[category]">
+                            <span>{{category}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" ng-click="uncheck_all()">Uncheck All</button>
+                        <button class="btn btn-primary" ng-click="check_all()">Check All</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" ng-repeat="event in events | filter: filterByCategory">
+                        <div class="card-container static">
+                            <div class="card">
+                                <div class="front">
+                                    <div class="cover"></div>
+                                    <div class="header" ng-if="!!event.image">
+                                        <a  href="{{event.image}}" data-imagelightbox="image">
+                                        <img class="img-circle" src="{{event.image}}">
+                                        </a>
+                                    </div>
+                                    <div class="header" ng-if="!event.image">
+                                        <div style="width:100%;background-color:#9E9E9E;width: 100%;height:100%;"></div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="title">{{event.title}}</h3>
+                                            <h5>
+                                                <i class="glyphicon glyphicon-map-marker"></i> {{event.location}}
+                                            </h5>
+                                            <h5>
+                                                <i class="glyphicon glyphicon-calendar"></i> {{event.date}}
+                                            </h5>
+                                            <h5>
+                                                <i class="glyphicon glyphicon-time"></i> {{event.time}}
+                                            </h5>
+                                            <div style='word-wrap:break-word' ng-bind-html="event.description"></div>
+                                        </div>
+                                        <div class="footer">
+                                            <i class="glyphicon glyphicon-tags"></i>
+                                            <button ng-repeat="cat in event.categories" style='padding:1px;margin:1px;' class="btn btn-primary" onclick="filterClick(this)">{{cat}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="promotions" ng-show="activeClass=='promotions'" ng-controller="promotionController">
+                <div class="checkboxList row">
+                    <div class="col-md-8">
+                        <div ng-repeat="category in categories" class="col-md-4">
+                            <label>
+                            <input type="checkbox" ng-model="filter[category]">
+                            <span>{{category}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" ng-click="uncheck_all()">Uncheck All</button>
+                        <button class="btn btn-primary" ng-click="check_all()">Check All</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" ng-repeat="promotion in promotions | filter: filterByCategory">
+                        <div class="card-container static">
+                            <div class="card">
+                                <div class="front">
+                                    <div class="cover"></div>
+                                    <div class="header" ng-if="!!promotion.image">
+                                        <a  href="{{promotion.image}}" data-imagelightbox="image">
+                                        <img class="img-circle" src="{{promotion.image}}">
+                                        </a>
+                                    </div>
+                                    <div class="header" ng-if="!promotion.image">
+                                        <div style="width:100%;background-color:#9E9E9E;width: 100%;height:100%;"></div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="title">{{promotion.title}}</h3>
+                                            <h5 ng-if="promotion.startDate!=''">
+                                                <i class="glyphicon glyphicon-calendar"></i> Start: {{promotion.startDate}}
+                                            </h5>
+                                            <h5 ng-if="promotion.endDate!=''">
+                                                <i class="glyphicon glyphicon-calendar"></i> End:  {{promotion.endDate}}
+                                            </h5>
+                                            <div style='word-wrap:break-word' ng-bind-html="promotion.description"></div>
+                                        </div>
+                                        <div class="footer">
+                                            <i class="glyphicon glyphicon-tags"></i>
+                                            <button ng-repeat="cat in promotion.categories" style='padding:1px;margin:1px;' class="btn btn-primary" onclick="filterClick(this)">{{cat}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="js/imagelightbox.js"></script>
+    </body>
+</html>

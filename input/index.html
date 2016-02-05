@@ -1,0 +1,93 @@
+<html ng-app="inputPage">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+<link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="css/selectize.bootstrap3.css">
+<link rel="stylesheet" href="css/selectize.default.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/dropzone.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script src="js/bootstrap-clockpicker.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/selectize.min.js"></script>
+<script src="data.js"></script>
+<script src="js/fileUpload.js"></script>
+<script src="calendarScripts.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth">
+    </script>
+	<script src="js/init.js"></script>
+</head>
+<body ng-controller="MainController">
+<div class="container">
+<div class="row">
+<h1>Demo of Event Input Page</h1><small>This demo is made for the OSA project</small><hr>
+</div>
+<div class="row well" id="console-div"><button id="authorize-btn" class="btn btn-primary" onclick="handleAuthClick(event)">Sign In</button></div><hr>
+<div id="input-div" style="display:none">
+  <div class="form-group">
+    <label>Event Title</label>
+    <input type="eventTitle" class="form-control inputValue" id="eventTitle" placeholder="Title">
+  </div>
+  <label>Date</label>
+  <div class="input-group date" id="datepicker-container">
+  
+  <input type="text" class="form-control inputValue" id="eventDate"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>
+<script type="text/javascript">
+$('#datepicker-container input').datepicker({
+	autoclose: true,
+	format: "yyyy-mm-dd"
+});
+</script>
+<label>Time</label>
+<div class="input-group clockpicker" data-align="top" data-autoclose="true">
+    <input type="text" class="form-control inputValue" id="eventTime">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
+<script type="text/javascript">
+$('.clockpicker').clockpicker();
+</script>
+  <div class="form-group">
+    <label>Location</label>
+	
+    <select class="form-control inputValue" id="eventLocation" placeholder="Location">
+		
+	</select>
+  </div>
+<div class="form-group">
+    <label>Categories</label>
+	
+    <select class="form-control inputValue" id="eventCategories" placeholder="Categories">
+		
+	</select>
+  </div>
+  <div class="form-group">
+    <label >Description</label>
+    <textarea rows="3" id="eventDescription" class="form-control inputValue" placeholder="Description"></textarea>
+  </div>
+<div class="form-group">
+    <label >Image Upload</label>
+    <div class="dropzone" id='imageUploadContainer' onclick="imageUpload.click()">
+  <input type='file' id='imageUpload' style="display:none" onchange='handleFileUpload(this,"0B0Gg1PNA_IbJQjFWalJrb2RuNG8")'>
+</div>
+  </div>
+  <div class="form-group">
+    <label >Attachment Upload</label>
+    <div class="dropzone" id='attachmentUploadContainer' onclick="attachmentUpload.click()">
+  <input type='file' id='attachmentUpload' style="display:none" onchange='handleFileUpload(this,"0B0Gg1PNA_IbJei1xUXd3ZlBzbGM")'>
+</div>
+  </div>
+  <button class="btn btn-primary" onclick="handleSubmitClick(event)">Submit</button>
+</div>
+
+
+
+  </div>
+   
+</body>
+</html>
