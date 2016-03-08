@@ -31,7 +31,7 @@ function initPromotions($scope) {
     }
 }
 function initEvents($scope) {
-    var calendarId = '04vk2bmpkinvlmhc23964pcllg@group.calendar.google.com';
+    var calendarId = 'oh6scv8j20n4g5dhv5h7p16rh4@group.calendar.google.com';
     var apiKey = 'AIzaSyDI29U1bMeKZLbkVbbmnvRiSdxlEKn6K5I';
     var xhr = new XMLHttpRequest();
     xhr.open("GET", 'https://content.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calendarId) + '/events?maxResults=200&orderBy=startTime&showDeleted=false&singleEvents=true&timeMin=' + (new Date()).toISOString() + '&key=' + apiKey, true);
