@@ -46,7 +46,7 @@
                                     <div class="cover"></div>
                                     <div class="header" ng-if="!!event.image">
                                         <a  href="{{event.image}}" data-imagelightbox="image">
-                                        <img class="img-circle" src="{{event.image}}">
+                                        <img class="img-circle" ng-src="{{event.image}}">
                                         </a>
                                     </div>
                                     <div class="header" ng-if="!event.image">
@@ -100,7 +100,7 @@
                                     <div class="cover"></div>
                                     <div class="header" ng-if="!!promotion.image">
                                         <a  href="{{promotion.image}}" data-imagelightbox="image">
-                                        <img class="img-circle" src="{{promotion.image}}">
+                                        <img class="img-circle" ng-src="{{promotion.image}}">
                                         </a>
                                     </div>
                                     <div class="header" ng-if="!promotion.image">
