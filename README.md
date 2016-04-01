@@ -28,7 +28,7 @@ Google Calendar has the advantage that events stored on Google Calendar naturall
 Because promotion information is static, i.e. each promotion is just like an item in a list. Additionally, we need to sort promotion based on priority, not chronology. Therefore, we choose Google Spreadsheet as the data platform: it is analogous to a giant bulletin. It's relatively intuitive because each row is a promotion. The ordering of promotions inherits the natural ordering of rows.
 
 #Data structure
-We encode each event/promotion into a ##JSON# object.
+We encode each event/promotion into a **JSON** object.
 ##Event
   - Title (Plain text)
   - Date (ISO 8601)
@@ -69,7 +69,8 @@ For optional fields, we use null to denote lack of corresponding information. Th
 
 ##Data structure of promotion on Google Sheets
 Each row is a promotion, and each column designate a field. So the first row (header row) looks like this:
-Title | Start Date | End Date | Categories | Description | Image | Attachment
+
+```Title | Start Date | End Date | Categories | Description | Image | Attachment```
 
 #Inner mechanism when the page is opened
 Two scripts are running:
