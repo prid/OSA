@@ -51,7 +51,33 @@ We encode each event/promotion into a ##JSON# object.
 Since neither Google Calendar nor Google Sheets can store JSON format as it is, we have to store the information differently. 
 
 ##Data structure of event on Google Calendar
+A Google Calendar event includes the following fields:
+  - Title
+  - (Start) Date
+  - (Start) Time
+  - Location
+  - Description/notes
 
+Therefore, we **JSON Stringify** the following 
+  - Categories (Array of plain text)
+  - Description (HTML)
+  - Image (optional) (Link)
+  - Attachment (optional) (Link)
+into the Description/notes field in a Google Calendar event.
+
+For optional fields, we use null to denote lack of corresponding information. This is due to consideration of extendability.
+
+##Data structure of promotion on Google Sheets
+Each row is a promotion, and each column designate a field. So the first row (header row) looks like this:
+Title | Start Date | End Date | Categories | Description | Image | Attachment
 
 #Inner mechanism when the page is opened
+Two scripts are running:
+  1. Script designated to fetch calendar
+  2. Script designated to fetch spreadsheets
+
+Then scripts dealing with transforming raw return into strict JSON format are running, we then have arrays of event objects and promotion objects.
+
+Because Angularjs binds data with view, the view is automatically updated once arrays of event objects and promotion objects are ready.
+
 #Publishing Workflow
